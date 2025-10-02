@@ -1,6 +1,6 @@
 #include "hook.h"
 
-int start_hook(fthook_t *hook, uintptr_t hooked_function, ftrace_fn hook_function)
+int start_hook(fthook_t *hook, uintptr_t hooked_function, ftrace_func_t hook_function)
 {
 	int ret = 0;
 
@@ -8,7 +8,7 @@ int start_hook(fthook_t *hook, uintptr_t hooked_function, ftrace_fn hook_functio
 	hook->original_function = hooked_function;
 	hook->ops.func = hook_function;
 	hook->ops.flags = FTRACE_OPS_FL_SAVE_REGS
-		| FTRACE_OPS_FL_RECURSION_SAFE
+		| FTRACE_OPS_FL_RECURSION
 		| FTRACE_OPS_FL_IPMODIFY;
 
 	ret = ftrace_set_filter_ip(&hook->ops, hook->original_function, 0, 0);

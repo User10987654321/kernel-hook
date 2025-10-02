@@ -48,11 +48,11 @@ typedef struct fthinit
 {
 	const char *symbol_name;
 	uintptr_t (*symbol_getter) (void);
-	ftrace_fn hook_function;
+	ftrace_func_t hook_function;
 	fthook_t *hook;
 } fthinit_t;
 
-extern int start_hook(fthook_t *hook, uintptr_t hooked_function, ftrace_fn hook_function);
+extern int start_hook(fthook_t *hook, uintptr_t hooked_function, ftrace_func_t hook_function);
 extern int end_hook(fthook_t *hook);
 extern int start_hook_list(const fthinit_t *hook_list, size_t size);
 extern int end_hook_list(const fthinit_t *hook_list, size_t size);
